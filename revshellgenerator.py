@@ -441,7 +441,8 @@ class ReverseShellGenerator(Cmd):
     REVERSE = 'reverse'
     LISTENERS = 'listeners'
     SHELLS = 'shells'
-    list_actions = [REVERSE, LISTENERS, SHELLS]
+    MSFVENOM = 'msfvenom'
+    list_actions = [REVERSE, LISTENERS, SHELLS, MSFVENOM]
 
     def do_ip(self, ip: str):
         if ip:
@@ -500,6 +501,10 @@ class ReverseShellGenerator(Cmd):
             elif item == self.SHELLS:
                 for i, shell in enumerate(shells):
                     print(colored(f"{i} - {shell}", 'yellow'))
+            elif item == self.MSFVENOM:
+                for i, venom in enumerate(msf_venom_commands):
+                    print(colored(f"{i} - {venom['name']}", 'yellow'))
+
 
     def do_get(self, command: str):
         if not self.ip:
@@ -523,6 +528,9 @@ class ReverseShellGenerator(Cmd):
             return
         else:
             item = chunks[0]
+            if item not in self.list_actions:
+                print(invalid_item_message)
+                return
             try:
                 index = int(chunks[1])
             except Exception:
@@ -555,6 +563,8 @@ class ReverseShellGenerator(Cmd):
             return get_item_from_list(listener_commands, 'command', index)
         elif item == self.SHELLS:
             return get_item_from_list(shells, 'command', index)
+        elif item == self.MSFVENOM:
+            return get_item_from_list(msf_venom_commands, 'command', index)
 
     def help_ip(self):
         print(colored(os.linesep.join(['ip [ip_address]',
@@ -591,16 +601,42 @@ class ReverseShellGenerator(Cmd):
                                        "Use 'list' command for getting the index."
                                        ]), 'yellow'))
 
+def get_arguments():
+    from argparse import ArgumentParser
+    parser = ArgumentParser(description="Reverse Shell Generator Script")
+    parser.add_argument('--ip',
+                        dest='ip',
+                        required=False,
+                        type=str,
+                        help="Specify the IP address to put into the chosen command template. "
+                             "If omitted, the script requires you to interactively prompt it.")
+    parser.add_argument('--port',
+                        dest='port',
+                        required=False,
+                        type=int,
+                        help="Specify the port to put into the chosen command template. "
+                             "If omitted, the script requires you to interactively prompt it.")
+    parser.add_argument('--shell',
+                        dest='shell',
+                        required=False,
+                        default='/bin/sh',
+                        type=str,
+                        help="Specify which shell interpreter should be put into the generated command. "
+                             "If omitted, can be changed interactively. "
+                             f"Default is '/bin/sh'.")
+    options = parser.parse_args()
+    return options
+
+
 
 def main():
-    ReverseShellGenerator().cmdloop()
+    options = get_arguments()
+    generator = ReverseShellGenerator()
+    generator.ip = options.ip
+    generator.port = options.port
+    generator.shell = options.shell
 
-    # for shell in reverse_shell_commands:
-    #     command = shell['command'] \
-    #         .replace("{ip}", options.ip) \
-    #         .replace("{port}", f"{options.port}") \
-    #         .replace("{shell}", options.shell)
-    #     print(command)
+    generator.cmdloop()
 
 
 if __name__ == '__main__':
