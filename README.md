@@ -37,7 +37,8 @@ E.g.: list shells
 get [ reverse | listeners | shells | msfvenom ] [index]
 Generate the actual command with the given options.
 The first parameter specifies which type of the command it's going to be.
-The [index] parameter specifies which template should be used for generating the command.E.g.: get reverse 0
+The [index] parameter specifies which template should be used for generating the command.
+E.g.: get reverse 0
 Use 'list' command for getting the index.
 >>
 ```
