@@ -569,7 +569,8 @@ class ReverseShellGenerator(Cmd):
     def help_shell(self):
         print(colored(os.linesep.join([f'shell [ {" | ".join(shells)} ]',
                                        'Set the desired shell to be used in the generated reverse shell command. ',
-                                       'E.g.: shell /bin/sh',
+                                       'E.g.: shell /bin/bash',
+                                       "The '/bin/sh' shell is the default one.",
                                        ]), 'yellow'))
 
     def help_list(self):
@@ -585,6 +586,7 @@ class ReverseShellGenerator(Cmd):
                                        "The first parameter specifies which type of the command it's going to be.",
                                        "The [index] parameter specifies which template should be used for generating "
                                        "the command. ",
+                                       "E.g.: get reverse 0",
                                        '',
                                        "Use 'list' command for getting the index."
                                        ]), 'yellow'))
