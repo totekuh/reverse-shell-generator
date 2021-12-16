@@ -8,10 +8,10 @@ and you want to have everything in your console.
 # Installation
 
 ```bash
-$ apt install python3 python3-pip
-$ git clone https://github.com/cyberhexe/reverse-shell-generator
-$ cd reverse-shell-generator
-$ pip3 install -r requirements.txt
+apt install python3 python3-pip
+git clone https://github.com/cyberhexe/reverse-shell-generator
+cd reverse-shell-generator
+pip3 install -r requirements.txt
 ```
 
 # Usage
