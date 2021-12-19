@@ -443,6 +443,7 @@ class ReverseShellGenerator(Cmd):
     SHELLS = 'shells'
     MSFVENOM = 'msfvenom'
     list_actions = [REVERSE, LISTENERS, SHELLS, MSFVENOM]
+    get_actions = [REVERSE, LISTENERS, MSFVENOM]
 
     def do_ip(self, ip: str):
         if ip:
@@ -590,7 +591,7 @@ class ReverseShellGenerator(Cmd):
                                        ]), 'yellow'))
 
     def help_get(self):
-        print(colored(os.linesep.join([f'get [ {" | ".join(self.list_actions)} ] [index]',
+        print(colored(os.linesep.join([f'get [ {" | ".join(self.get_actions)} ] [index]',
                                        'Generate the actual command with the given options. ',
                                        '',
                                        "The first parameter specifies which type of the command it's going to be.",
