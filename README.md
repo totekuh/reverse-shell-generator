@@ -40,7 +40,7 @@ list [ reverse | listeners | shells | msfvenom ]
 List the available templates, shells or listener commands.
 E.g.: list shells
 >> help get
-get [ reverse | listeners | shells | msfvenom ] [index]
+get [ reverse | listeners | msfvenom ] [index]
 Generate the actual command with the given options.
 The first parameter specifies which type of the command it's going to be.
 The [index] parameter specifies which template should be used for generating the command.
