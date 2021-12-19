@@ -1,5 +1,7 @@
 # General Information
 
+https://pypi.org/project/revshell-generator/
+
 A command-line reverse shell generator, 
 if you got tired of visiting https://www.revshells.com/ every time you need to pop up a reverse shell,
 and you want to have such a generator in your terminal.
