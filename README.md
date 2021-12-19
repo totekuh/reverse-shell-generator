@@ -14,7 +14,7 @@ cd reverse-shell-generator
 pip3 install -r requirements.txt
 ```
 
-Or using PyPI:
+Or from PyPI:
 ```bash
 apt install python3 python3-pip
 pip3 install revshell-generator
