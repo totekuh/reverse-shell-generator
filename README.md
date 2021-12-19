@@ -12,19 +12,17 @@ apt install python3 python3-pip
 git clone https://github.com/cyberhexe/reverse-shell-generator
 cd reverse-shell-generator
 pip3 install -r requirements.txt
+python3 revshellgenerator.py -h
 ```
 
 Or from PyPI:
 ```bash
 apt install python3 python3-pip
 pip3 install revshell-generator
+revshell-generator -h
 ```
 
 # Usage
-
-### Printing the script arguments
-
-`python3 revshellgenerator.py -h`
 
 ### Running the reverse shell generator
 
