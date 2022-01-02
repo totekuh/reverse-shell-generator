@@ -19,8 +19,8 @@ python3 revshellgenerator.py -h
 
 Or from PyPI:
 ```bash
-apt install python3 python3-pip
-pip3 install revshell-generator
+sudo apt install python3 python3-pip
+sudo pip3 install revshell-generator
 revshell-generator -h
 ```
 
