@@ -11,7 +11,7 @@ and you want to have such a generator in your terminal.
 
 ```bash
 apt install python3 python3-pip
-git clone https://github.com/cyberhexe/reverse-shell-generator
+git clone https://github.com/totekuh/reverse-shell-generator
 cd reverse-shell-generator
 pip3 install -r requirements.txt
 python3 revshellgenerator.py -h

