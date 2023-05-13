@@ -8,7 +8,7 @@ from generator import ReverseShellGenerator
 from netifaces import AF_INET
 from termcolor import colored
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath('../reverseshellgenerator/'))))
 
 
 class TestReverseShellGenerator(unittest.TestCase):
