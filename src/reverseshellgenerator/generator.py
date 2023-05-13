@@ -5,6 +5,11 @@ from termcolor import colored
 from shells_templates import bind_shell_commands, reverse_shell_commands, msf_venom_commands, listener_commands
 import netifaces as ni
 
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
 shells = ['sh',
           '/bin/sh',
           'bash',
@@ -47,11 +52,14 @@ class ReverseShellGenerator(Cmd):
     def do_ip(self, ip: str):
         if ip:
             try:
-                ip_address(ip)
+                if ip in ni.interfaces():  # check if interface exists
+                    self.ip = ni.ifaddresses(ip)[ni.AF_INET][0]['addr']  # take it's ip
+                else:
+                    ip_address(ip)
+                    self.ip = ip
             except Exception as e:
                 print(colored(f"{e}", 'red'))
                 return
-            self.ip = ip
             print(colored(f"The IP address has been set as '{self.ip}'", 'green'))
         else:
             print(colored('The IP address must not be empty', 'red'))
@@ -108,7 +116,7 @@ class ReverseShellGenerator(Cmd):
     def do_get(self, command: str):
         if not self.ip:
             print(colored("The IP address must be set before generating the command. "
-                          "Use 'ip <ip_address>' to set it.", "red"))
+                          "Use 'ip <ip_address>' or `ip <iface_name>` to set it.", "red"))
             return
         if not self.port:
             print(colored("The port must be set before generating the command. "
@@ -204,7 +212,7 @@ class ReverseShellGenerator(Cmd):
 def get_arguments():
     from argparse import ArgumentParser
     parser = ArgumentParser(description="Reverse Shell Generator Script")
-    parser.add_argument('--ip', '--iface',
+    parser.add_argument('--ip',
                         dest='ip',
                         required=False,
                         type=str,
