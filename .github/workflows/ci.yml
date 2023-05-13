@@ -1,6 +1,5 @@
 name: Revshell Generator CI
 
-# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 on:
   push:
     branches:
@@ -8,6 +7,19 @@ on:
       - develop
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install Package
+      run: pip install .
+    - name: Run Tests
+      run: python3 -m unittest
+
   publish-test-pypi:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
