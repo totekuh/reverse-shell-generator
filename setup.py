@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-version = "1.0.10"
+version = "1.0.11"
 
-## version 1.0.10 - 14.05.2023
+## version 1.0.11 - 14.05.2023
 
 """A setuptools based setup module.
 
@@ -35,7 +35,7 @@ setup(
     long_description_content_type='text/markdown',  # Optional (see note above)
 
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/totekuh/revshell-generator',  # Optional
+    url='https://github.com/totekuh/reverse-shell-generator',  # Optional
 
     author='totekuh',  # Optional
 
@@ -78,7 +78,7 @@ setup(
     },
 
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/totekuh/revshell-generator/issues',
-        'Source': 'https://github.com/totekuh/revshell-generator',
+        'Bug Reports': 'https://github.com/totekuh/reverse-shell-generator/issues',
+        'Source': 'https://github.com/totekuh/reverse-shell-generator',
     },
 )
