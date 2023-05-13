@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-version = "1.0.7"
+version = "1.0.10"
 
-## version 1.0.7 - 14.05.2023
+## version 1.0.10 - 14.05.2023
 
 """A setuptools based setup module.
 
@@ -62,8 +62,6 @@ setup(
     package_dir={'': './src'},  # Optional
 
     packages=find_packages(where='src'),  # Required
-
-    test_suite='test_generator',
 
     python_requires='>=3.6, <4',
 
