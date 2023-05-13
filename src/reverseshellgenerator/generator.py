@@ -2,12 +2,17 @@
 from cmd import Cmd
 import os
 from termcolor import colored
-from shells_templates import bind_shell_commands, reverse_shell_commands, msf_venom_commands, listener_commands
 import netifaces as ni
 
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+module_path = os.path.dirname(__file__)
+sys.path.append(module_path)
+
+from shells_templates import bind_shell_commands, reverse_shell_commands, msf_venom_commands, listener_commands
+
+
 
 
 shells = ['sh',

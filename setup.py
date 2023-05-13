@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-version = "1.0.11"
+version = "1.0.12"
 
-## version 1.0.11 - 14.05.2023
+## version 1.0.12 - 14.05.2023
 
 """A setuptools based setup module.
 
