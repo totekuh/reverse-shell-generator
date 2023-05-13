@@ -19,6 +19,8 @@ jobs:
       run: pip install .
     - name: Run Tests
       run: python3 -m unittest
+      env:
+        PYTHONPATH: ${{ github.workspace }}/src/reverseshellgenerator/
 
   publish-test-pypi:
     runs-on: ubuntu-latest
